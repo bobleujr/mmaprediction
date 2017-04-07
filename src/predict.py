@@ -6,7 +6,7 @@ import random
 class DataResource(object):
 
     def __init__(self):
-        self.conn = psycopg2.connect(dbname="", user="", password="", port="", host="")
+        self.conn = psycopg2.connect(dbname="mmastats", user="common", password="011092", port="5432", host="localhost")
         self.count = 0
 
     def get_cursor(self):
@@ -48,4 +48,9 @@ class DataResource(object):
 
         # return df, perhaps return shape info too
         return df
+
+    def get_all_fights(self, k=4):
+
+
+    def get_bout_fights(self, k=4):
 

@@ -29,7 +29,7 @@ CREATE OR REPLACE FUNCTION get_category_fights(weight_category text, mycursor re
       d.subavg as subavg_f2,
 
       CASE
-        WHEN a.hasher = b.fighter1_id
+        WHEN a.hash = b.fighter1_id
         THEN 0.99
         ELSE 0.01
       END as result
@@ -38,12 +38,12 @@ CREATE OR REPLACE FUNCTION get_category_fights(weight_category text, mycursor re
     from fighterdb_fightermetric a
 
     inner join fighterdb_fightmetric b
-    on b.fighter1_id = a.hasher or b.fighter2_id = a.hasher
+    on b.fighter1_id = a.hash or b.fighter2_id = a.hash
 
     inner join fighterdb_fightermetric d
-    on d.hasher = (
+    on d.hash = (
       CASE
-        WHEN a.hasher = b.fighter1_id
+        WHEN a.hash = b.fighter1_id
         THEN b.fighter2_id
         ELSE b.fighter1_id
       END
@@ -51,10 +51,10 @@ CREATE OR REPLACE FUNCTION get_category_fights(weight_category text, mycursor re
 
 
     inner join fighterdb_eventmetric c
-    on b.event_hasher = c.hasher
+    on b.event_hash = c.hash
 
     where b.weight_cate = weight_category
-    order by a.hasher);
+    order by a.hash);
 
     RETURN mycursor;
   END;

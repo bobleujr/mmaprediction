@@ -29,7 +29,7 @@ CREATE OR REPLACE FUNCTION get_fighter_basics_tp(f1 text, f2 text, mycursor refc
       d.subavg as subavg_f2
 
       /*CASE
-        WHEN a.hasher = b.fighter1_id
+        WHEN a.hash = b.fighter1_id
         THEN 1
         ELSE 0
       END as result*/
@@ -38,7 +38,7 @@ CREATE OR REPLACE FUNCTION get_fighter_basics_tp(f1 text, f2 text, mycursor refc
     from fighterdb_fightermetric a, fighterdb_fightermetric d
 
     where a.name = f1 and d.name = f2
-    order by a.hasher);
+    order by a.hash);
 
     RETURN mycursor;
   END;
